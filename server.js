@@ -15,4 +15,3 @@ db.once('open', () => {
         console.log(`Listenning for actitvity on ${PORT}`)
     });
 });
-
