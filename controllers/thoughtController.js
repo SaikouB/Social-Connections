@@ -81,13 +81,10 @@ module.exports = {
     try {
       const thought = await Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
-        { $pull: { reactions: { reactionId: req.params.reactionId } } },
+        { $pull: { reactions: { _id: req.params.reactionId } } },
         { runValidators: true, new: true }
       );
-      console.log(thought)
-      console.log('thoughtId:', req.params.thoughtId);
-      console.log('reactionId:', req.params.reactionId);
-      console.log('Update Query:', { _id: req.params.thoughtId }, { $pull: { reactions: { reactionId: req.params.reactionId } } });
+      console.log(thought);
       if (!thought) {
         res.status(404).json({ message: 'Cannot find thought' })
       } else {
