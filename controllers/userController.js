@@ -21,7 +21,8 @@ module.exports = {
 				res.status(200).json(user);
 			}
 		} catch (error) {
-			res.status(500).json(error)
+			console.log('Error:', error)
+			res.status(500).json({ message: 'Internal server error' })
 		}
 	},
 	async createUser(req, res) {
@@ -36,7 +37,7 @@ module.exports = {
 		try {
 			const updateUser = await User.findOneAndUpdate(
 				{ _id: req.params.userId },
-				{ $set: req.body.userId },
+				{ $set: req.body },
 				{ runValidators: true, new: true },
 			);
 			if (!updateUser) {
@@ -45,6 +46,7 @@ module.exports = {
 				res.status(200).json(updateUser)
 			}
 		} catch (error) {
+			console.log(error)
 			res.status(500).json(error)
 		}
 	},
@@ -56,7 +58,7 @@ module.exports = {
 			if (!deleteUser) {
 				res.json(400).json({ message: 'User with Id not found' });
 			} else {
-				res.status(200).json(deleteUser, deleteUserThouhts)
+				res.status(200).json(deleteUser)
 			}
 		} catch (error) {
 			res.status(500).json(error)
@@ -81,16 +83,18 @@ module.exports = {
 	async deleteFriend(req, res) {
 		try {
 			const deleteFriend = await User.findOneAndUpdate(
-				{ _id: req.params.UserId },
+				{ _id: req.params.userId },
 				{ $pull: {friends: req.params.friendId } },
-				{ new: true },
-			);
+				{ new: true }
+				);
+				console.log(deleteFriend)
 			if (!deleteFriend) {
-				res.status(404).status({ message: 'Cannot find user with such Id' })
+				res.status(404).json({ message: 'Cannot find user with such Id' })
 			} else {
 				res.status(200).json(deleteFriend)
 			}
 		} catch (error) {
+			console.log(error)
 			res.status(500).json(error);
 		}
 	},
