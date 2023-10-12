@@ -1,5 +1,6 @@
+// Creates Schema database through mongoose
 const { Schema, model } = require('mongoose');
-
+// User Schema is created
 const userSchema = new Schema(
     {
         username: {
@@ -35,7 +36,7 @@ const userSchema = new Schema(
         id: false,
     }
 );
-
+// Creates virtual for friendCount and gets friends length
 userSchema
 .virtual('friendCount')
 .get( function () {
@@ -43,5 +44,5 @@ userSchema
 })
 
 const User = model('User', userSchema);
-
+// Exports User Schema
 module.exports = User;

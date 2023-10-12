@@ -1,7 +1,9 @@
+// Requires formatted date by dayjs package
 const formattedDate = require('../utils/date');
+// Creates Schema database through mongoose
 const { Schema, model } = require('mongoose');
 
-
+// Reaction Schema is created
 const reactionSchema = new Schema (
     {
         reactionId: {
@@ -33,5 +35,5 @@ const reactionSchema = new Schema (
 );
 
 const Reaction = model('Reaction', reactionSchema);
-
+// Exports reaction Schema 
 module.exports = Reaction;

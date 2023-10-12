@@ -1,5 +1,9 @@
+// Imports Thought model
 const { User, Thought } = require('../models');
 
+// Exports Thought routes as an object
+// Uses Async Await with try and catch blocks to request and get responses from the Thought model DB
+// Methods from API routes are used
 module.exports = {
   async getThoughts(req, res) {
     try {

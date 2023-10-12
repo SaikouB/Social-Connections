@@ -1,5 +1,9 @@
+// Imports User and Thought models
 const { User, Thought } = require('../models');
 
+// Exports User routes as an object
+// Uses Async Await with try and catch blocks to request and get responses from the User model DB
+// Methods from API routes are used
 module.exports = {
 	async getUsers(req, res) {
 		try {
@@ -53,7 +57,7 @@ module.exports = {
 	async deleteUser(req, res) {
 		try {
 			const deleteUser = await User.findOneAndDelete({ _id: req.params.userId });
-			// Bonus to find user thoughts and delete when user is deleted
+			// Bonus to find user thoughts and delete when user is deleted ???
 			const deleteUserThouhts = await Thought.deleteMany();
 			if (!deleteUser) {
 				res.json(400).json({ message: 'User with Id not found' });
